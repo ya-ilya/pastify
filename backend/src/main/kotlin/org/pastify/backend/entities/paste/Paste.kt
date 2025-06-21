@@ -1,5 +1,6 @@
 package org.pastify.backend.entities.paste
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
@@ -10,6 +11,7 @@ import java.time.LocalDateTime
 @Entity
 class Paste(
     var title: String?,
+    @Column(columnDefinition = "TEXT")
     var content: String,
     var language: PasteLanguage,
     val expiresOn: LocalDateTime?,

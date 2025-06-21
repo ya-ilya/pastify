@@ -4,6 +4,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Account from "./pages/account/Account.tsx";
 import App from "./pages/app/App.tsx";
+import Feed from "./pages/feed/Feed.tsx";
 import Paste from "./pages/paste/Paste.tsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <Account />,
+      },
+      {
+        path: "/feed",
+        element: <Feed />,
       },
       {
         path: "/:id",

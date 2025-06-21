@@ -46,7 +46,12 @@ export class PasteController extends Controller {
     limit: number = 10,
     offset: number = 0
   ): Promise<{ pastes: Paste[]; total: number; pages: number }> {
-    const response = await this.client.get(`/?limit=${limit}&offset=${offset}`);
+    const response = await this.client.get("", {
+      params: {
+        limit: limit,
+        offset: offset,
+      },
+    });
 
     return {
       pastes: response.data,

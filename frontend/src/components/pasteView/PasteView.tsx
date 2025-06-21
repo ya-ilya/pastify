@@ -64,6 +64,9 @@ export function PasteView(props: PasteViewProps) {
           <b>ID:</b> {props.paste.id}
         </span>
         <span className="paste-view__meta-item">
+          <b>Автор:</b> {props.paste.user.username}
+        </span>
+        <span className="paste-view__meta-item">
           <b>Язык:</b> {props.paste.language}
         </span>
         <span className="paste-view__meta-item">

@@ -37,7 +37,7 @@ export function Header() {
         {session == null ? (
           <>
             <a
-              href="/login"
+              href="/signin"
               className="header__button header__button--outline"
             >
               Войти
