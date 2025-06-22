@@ -8,6 +8,6 @@ import java.time.LocalDateTime
 
 interface PasteRepository : JpaRepository<Paste, String> {
     fun findAllByExpiresOnBefore(dateTime: LocalDateTime): List<Paste>
-    fun findAllByExpiresOnAfterOrExpiresOnIsNull(dateTime: LocalDateTime, pageable: Pageable): Page<Paste>
+    fun findAllByExpiresOnAfterOrExpiresOnIsNullAndIsPrivateIsFalse(dateTime: LocalDateTime, pageable: Pageable): Page<Paste>
     fun findAllByUserAndExpiresOnAfterOrExpiresOnIsNull(user: User, dateTime: LocalDateTime): List<Paste>
 }

@@ -1,12 +1,14 @@
 import "./index.css";
 
+import * as api from "./api";
+
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import React, { useEffect } from "react";
 
 import Account from "./pages/account/Account.tsx";
 import App from "./pages/app/App.tsx";
 import Feed from "./pages/feed/Feed.tsx";
 import Paste from "./pages/paste/Paste.tsx";
-import React from "react";
 import ReactDOM from "react-dom/client";
 import SignIn from "./pages/login/SignIn.tsx";
 import SignUp from "./pages/signUp/SignUp.tsx";
@@ -34,6 +36,13 @@ export const AuthenticationContext = React.createContext<
 
 function AuthenticationRoute() {
   const [session, setSession] = useLocalStorage<Session>("session");
+  const refreshToken = api.useRefreshToken();
+
+  useEffect(() => {
+    if (session && api.isTokenExpired(session.accessToken)) {
+      refreshToken();
+    }
+  }, [session]);
 
   return (
     <AuthenticationContext.Provider value={[session, setSession]}>

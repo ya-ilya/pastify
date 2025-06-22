@@ -1,6 +1,7 @@
 import { AuthenticationResponse, RefreshTokenRequest, SignInRequest, SignUpRequest } from "../models";
-import axios, { Axios } from "axios";
 
+import { Axios } from "axios";
+import { Controller } from "./Controller";
 import { axiosClient } from "../..";
 import { useState } from "react";
 
@@ -14,14 +15,9 @@ export function createAuthenticationController() {
   return new AuthenticationController(axiosClient);
 }
 
-export class AuthenticationController {
-  protected client: Axios;
-
+export class AuthenticationController extends Controller {
   constructor(client: Axios) {
-    this.client = axios.create({
-      ...client.defaults,
-      baseURL: client.defaults.baseURL + "/authentication",
-    });
+    super(client, "/authentication");
   }
 
   async signIn(body: SignInRequest): Promise<AuthenticationResponse> {

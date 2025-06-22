@@ -44,7 +44,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
         limit: Int,
         offset: Int
     ): Page<Paste> {
-        return pasteRepository.findAllByExpiresOnAfterOrExpiresOnIsNull(LocalDateTime.now(), OffsetBasedPageRequest(offset, limit))
+        return pasteRepository.findAllByExpiresOnAfterOrExpiresOnIsNullAndIsPrivateIsFalse(LocalDateTime.now(), OffsetBasedPageRequest(offset, limit))
     }
 
     fun getUserPastes(user: User): List<Paste> {
