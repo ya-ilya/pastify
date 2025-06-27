@@ -41,22 +41,28 @@ function Account() {
     <div className="account">
       <Header />
       {!isLoading ? (
-        <div className="account-paste-view__wrapper">
-          {pastes.map((paste) => {
-            return (
-              <PasteView
-                paste={paste}
-                ondelete={() => {
-                  setPastes((prevPastes) => {
-                    return prevPastes.filter((it) => it.id != paste.id);
-                  });
-                }}
-              />
-            );
-          })}
-        </div>
+        pastes.length === 0 ? (
+          <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
+            <div className="paste-view paste-view--loading">Вы еще не создавали паст</div>
+          </div>
+        ) : (
+          <div className="account-paste-view__wrapper">
+            {pastes.map((paste) => {
+              return (
+                <PasteView
+                  paste={paste}
+                  ondelete={() => {
+                    setPastes((prevPastes) => {
+                      return prevPastes.filter((it) => it.id != paste.id);
+                    });
+                  }}
+                />
+              );
+            })}
+          </div>
+        )
       ) : (
-        <div className="account-paste-view__wrapper">
+        <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
           <div className="paste-view paste-view--loading">Загрузка...</div>
         </div>
       )}

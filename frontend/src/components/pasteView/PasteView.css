@@ -9,18 +9,21 @@
   position: relative;
 }
 
-.paste-view--loading {
-  padding: 40px 0;
-  font-size: 20px;
-  color: #4a90e2;
-  text-align: center;
-}
-
+.paste-view--loading,
 .paste-view--error {
   padding: 40px 0;
   font-size: 20px;
-  color: #e74c3c;
   text-align: center;
+  box-shadow: none;
+  background: transparent;
+}
+
+.paste-view--loading {
+  color: #4a90e2;
+}
+
+.paste-view--error {
+  color: #e74c3c;
 }
 
 .paste-view__title {
@@ -119,8 +122,4 @@
 .paste-view__delete-link:hover {
   background: #faeaea;
   border-color: #c0392b;
-}
-
-.paste-view__delete-link svg {
-  display: block;
 }

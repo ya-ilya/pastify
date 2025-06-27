@@ -1,7 +1,7 @@
 import "./Header.css";
 
 import { AuthenticationContext } from "../..";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaUser } from "react-icons/fa";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,7 @@ export function Header() {
       </div>
       <div>
         {session == null ? (
-          <>
+          <div className="header__right">
             <a
               href="/signin"
               className="header__button header__button--outline"
@@ -48,14 +48,15 @@ export function Header() {
             >
               Зарегистрироваться
             </a>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="header__right">
             <a
               href="/account"
               className="header__button"
             >
-              Аккаунт
+              <FaUser />
+              {session.username}
             </a>
             <button
               onClick={handleLogout}
@@ -63,7 +64,7 @@ export function Header() {
             >
               Выйти
             </button>
-          </>
+          </div>
         )}
       </div>
     </header>

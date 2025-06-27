@@ -34,3 +34,11 @@
     max-width: 100%;
   }
 }
+
+.account-paste-view__wrapper--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
+}

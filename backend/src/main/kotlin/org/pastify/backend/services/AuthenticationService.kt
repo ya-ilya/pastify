@@ -1,6 +1,7 @@
 package org.pastify.backend.services
 
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
@@ -18,7 +19,7 @@ import javax.crypto.SecretKey
 
 @Service
 class AuthenticationService(
-    private val userService: org.pastify.backend.services.UserService,
+    private val userService: UserService,
     private val passwordEncoder: PasswordEncoder
 ) {
     @Value("\${token.signing.key}")
@@ -75,6 +76,10 @@ class AuthenticationService(
     }
 
     fun refreshToken(refreshToken: String): AuthenticationResponse {
+        if (isTokenExpired(refreshToken)) {
+            throw ResponseStatusException(HttpStatus.FORBIDDEN)
+        }
+
         val email = extractEmail(refreshToken)
         val user = userService
             .findUserByEmail(email)
@@ -115,7 +120,6 @@ class AuthenticationService(
         val email = extractEmail(accessToken)
         if (email != user.email) return false
         if (isTokenExpired(accessToken)) {
-            user.refreshToken = null
             return false
         }
         return true
@@ -164,11 +168,15 @@ class AuthenticationService(
     }
 
     private fun extractAllClaims(token: String): Claims {
-        return Jwts.parser()
-            .verifyWith(getSigningKey())
-            .build()
-            .parseSignedClaims(token)
-            .payload
+        return try {
+            Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .payload
+        } catch (ex: ExpiredJwtException) {
+            ex.claims
+        }
     }
 
     private fun getSigningKey(): SecretKey? {

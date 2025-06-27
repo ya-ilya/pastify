@@ -16,6 +16,15 @@ import { useLocalStorage } from "./hooks/index.ts";
 
 export * from "./config.ts";
 
+function isTokenExpired(token: string): boolean {
+  try {
+    const jwtPayload = JSON.parse(atob(token.split(".")[1]));
+    return Date.now() >= jwtPayload.exp * 1000;
+  } catch (error) {
+    return true;
+  }
+}
+
 export class Session {
   accessToken: string;
   refreshToken: string;
@@ -36,13 +45,41 @@ export const AuthenticationContext = React.createContext<
 
 function AuthenticationRoute() {
   const [session, setSession] = useLocalStorage<Session>("session");
-  const refreshToken = api.useRefreshToken();
 
   useEffect(() => {
-    if (session && api.isTokenExpired(session.accessToken)) {
-      refreshToken();
-    }
-  }, [session]);
+    const refreshToken = async () => {
+      if (!session) {
+        return;
+      }
+
+      if (!isTokenExpired(session.accessToken)) {
+        console.info("Access token is still valid, no need to refresh");
+        return;
+      }
+
+      if (isTokenExpired(session.refreshToken)) {
+        console.error("Refresh token is expired");
+        setSession(null);
+      }
+
+      try {
+        console.info(`Refreshing token`);
+
+        const refreshTokenResponse = await api.createAuthenticationController().refreshToken({
+          refreshToken: session.refreshToken,
+        });
+
+        setSession(refreshTokenResponse);
+
+        console.info(`Token refreshed successfully`);
+      } catch (err) {
+        setSession(null);
+        console.error("Failed to refresh token", err);
+      }
+    };
+
+    refreshToken();
+  }, [session, setSession]);
 
   return (
     <AuthenticationContext.Provider value={[session, setSession]}>

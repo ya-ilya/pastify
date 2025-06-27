@@ -51,19 +51,26 @@ function Feed() {
   return (
     <div className="feed">
       <Header />
-      <div className="feed-paste-view__wrapper">
-        {pastes.map((paste) => (
-          <PasteView
-            key={paste.id}
-            paste={paste}
-            ondelete={() => {}}
-          />
-        ))}
-        {isLoading && <div className="paste-view paste-view--loading">Загрузка...</div>}
-        {!hasMore && pastes.length === 0 && !isLoading && (
+      {pastes.length === 0 && !isLoading ? (
+        <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
           <div className="paste-view paste-view--loading">Нет паст</div>
-        )}
-      </div>
+        </div>
+      ) : isLoading && pastes.length === 0 ? (
+        <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
+          <div className="paste-view paste-view--loading">Загрузка...</div>
+        </div>
+      ) : (
+        <div className="feed-paste-view__wrapper">
+          {pastes.map((paste) => (
+            <PasteView
+              key={paste.id}
+              paste={paste}
+              ondelete={() => {}}
+            />
+          ))}
+          {isLoading && <div className="paste-view paste-view--loading">Загрузка...</div>}
+        </div>
+      )}
     </div>
   );
 }

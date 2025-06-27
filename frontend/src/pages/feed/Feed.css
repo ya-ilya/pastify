@@ -1,3 +1,12 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f2f5;
+}
+
 .feed-paste-view__wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -24,4 +33,12 @@
     margin-top: 80px;
     max-width: 100%;
   }
+}
+
+.feed-paste-view__wrapper--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
 }
