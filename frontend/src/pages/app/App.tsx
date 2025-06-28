@@ -5,6 +5,7 @@ import * as api from "../../api";
 import { useContext, useState } from "react";
 
 import { AuthenticationContext } from "../..";
+import { FeedPreview } from "../../components/feedPreview/FeedPreview";
 import { Header } from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 
@@ -55,7 +56,9 @@ function App() {
 
   return (
     <div className="home">
-      <Header />
+      <div className="header">
+        <Header />
+      </div>
       <div className="paste-form__wrapper">
         <form
           onSubmit={handleSubmit}
@@ -138,6 +141,7 @@ function App() {
           </div>
         )}
       </div>
+      <FeedPreview />
     </div>
   );
 }

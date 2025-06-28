@@ -7,18 +7,19 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
-  width: 100%;
+  width: 100vw;
   margin-bottom: 24px;
   padding: 16px 32px;
   background: #f7f8fa;
   z-index: 1000;
 }
 
-.header__left {
+.header__left,
+.header__right {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 12px;
 }
 
 .header__title {
@@ -28,12 +29,6 @@
   letter-spacing: 1px;
   text-decoration: none;
   cursor: pointer;
-}
-
-.header__right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
 .header__button {
@@ -52,6 +47,12 @@
   text-decoration: none;
 }
 
+.header__button:hover {
+  background: #357abd;
+  color: #fff;
+  text-decoration: none;
+}
+
 .header__button--outline {
   margin-right: 12px;
   background: #fff;
@@ -59,11 +60,23 @@
   color: #4a90e2;
 }
 
+.header__button--outline:hover {
+  background: #eaf4fd;
+  color: #357abd;
+  border-color: #357abd;
+}
+
 .header__button--outline-logout {
   margin-left: 12px;
   background: #fff;
   border: 1px solid red;
   color: red;
+}
+
+.header__button--outline-logout:hover {
+  background: #ffeaea;
+  color: #b71c1c;
+  border-color: #b71c1c;
 }
 
 .header__new-paste {
@@ -90,6 +103,38 @@
 
 .header__new-paste-text {
   display: inline;
+}
+
+.header__feed {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin-left: 18px;
+  padding: 8px 16px;
+  background: #f39c12;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.header__feed:hover {
+  background: #d68910;
+  color: #fff;
+}
+
+.header__feed-text {
+  display: inline;
+}
+
+@media (max-width: 1100px) {
+  .header__feed {
+    display: inline-flex;
+  }
 }
 
 @media (max-width: 600px) {
@@ -124,6 +169,19 @@
   }
 
   .header__new-paste-text {
+    display: none !important;
+  }
+
+  .header__feed {
+    padding: 7px 7px;
+    font-size: 18px;
+    margin-left: 8px;
+    min-width: 36px;
+    min-height: 36px;
+    justify-content: center;
+  }
+
+  .header__feed-text {
     display: none !important;
   }
 }
