@@ -13,12 +13,13 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 @Service
 class PasteService(private val pasteRepository: PasteRepository) {
     @Scheduled(fixedDelay = 60 * 60 * 1000)
     fun scheduledDeleteExpiredPastes() {
-        val now = LocalDateTime.now()
+        val now = LocalDateTime.now(ZoneOffset.UTC)
         val expiredPastes = pasteRepository.findAllByExpiresOnBefore(now)
         if (expiredPastes.isNotEmpty()) {
             pasteRepository.deleteAll(expiredPastes)
@@ -31,7 +32,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
             .findById(id)
             .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND) }
 
-        if (paste.expiresOn?.isBefore(LocalDateTime.now()) == true) {
+        if (paste.expiresOn?.isBefore(LocalDateTime.now(ZoneOffset.UTC)) == true) {
             deletePaste(paste)
             throw ResponseStatusException(HttpStatus.NOT_FOUND)
         }
@@ -44,7 +45,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
         offset: Int
     ): Page<Paste> {
         return pasteRepository.findAllByExpiresOnAfterOrExpiresOnIsNullAndIsPrivateIsFalse(
-            LocalDateTime.now(),
+            LocalDateTime.now(ZoneOffset.UTC),
             OffsetBasedPageRequest(offset, limit, JpaSort.by("createdAt"))
         )
     }
@@ -52,7 +53,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
     fun getUserPastes(user: User): List<Paste> {
         return pasteRepository.findAllByUserAndExpiresOnAfterOrExpiresOnIsNull(
             user,
-            LocalDateTime.now()
+            LocalDateTime.now(ZoneOffset.UTC)
         )
     }
 
@@ -69,7 +70,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
             id = RandomStringUtils.randomAlphanumeric(8).lowercase()
         } while (pasteRepository.existsById(id))
 
-        val date = LocalDateTime.now()
+        val date = LocalDateTime.now(ZoneOffset.UTC)
         val expiresOn = if (expiration == null || expiration <= 0) {
             null
         } else {
@@ -83,7 +84,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
                 language,
                 expiresOn,
                 isPrivate,
-                LocalDateTime.now(),
+                date,
                 user,
                 id
             )
