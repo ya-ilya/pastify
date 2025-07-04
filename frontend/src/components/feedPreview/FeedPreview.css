@@ -23,6 +23,7 @@
 @media (max-width: 1100px) {
   .feed-preview {
     visibility: hidden;
+    display: none;
   }
 }
 

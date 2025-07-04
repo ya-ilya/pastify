@@ -137,13 +137,14 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .header {
     padding: 10px 8px;
     margin-bottom: 12px;
   }
 
-  .header__left {
+  .header__left,
+  .header__right {
     gap: 10px;
   }
 
@@ -154,6 +155,7 @@
   .header__button,
   .header__button--outline,
   .header__button--outline-logout {
+    aspect-ratio: 1;
     font-size: 14px;
     padding: 7px 10px;
     margin: 0 2px;

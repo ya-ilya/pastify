@@ -2,11 +2,10 @@ import "./App.css";
 
 import * as api from "../../api";
 
+import { FeedPreview, Header } from "../../components";
 import { useContext, useState } from "react";
 
 import { AuthenticationContext } from "../..";
-import { FeedPreview } from "../../components/feedPreview/FeedPreview";
-import { Header } from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 
 const expirationOptions = [
@@ -18,7 +17,7 @@ const expirationOptions = [
   { value: null, label: "Без ограничения" },
 ];
 
-function App() {
+export function App() {
   const pasteController = api.usePasteController();
 
   const [title, setTitle] = useState("");
@@ -56,9 +55,7 @@ function App() {
 
   return (
     <div className="home">
-      <div className="header">
-        <Header />
-      </div>
+      <Header />
       <div className="paste-form__wrapper">
         <form
           onSubmit={handleSubmit}
@@ -145,5 +142,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -3,11 +3,11 @@ import "./SignUp.css";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthenticationContext } from "../..";
-import { Header } from "../../components/header/Header";
+import { Header } from "../../components";
 import { useAuthenticationController } from "../../api/controllers/AuthenticationController";
 import { useNavigate } from "react-router-dom";
 
-function SignUp() {
+export function SignUp() {
   const authController = useAuthenticationController();
   const [session, setSession] = useContext(AuthenticationContext);
 
@@ -111,5 +111,3 @@ function SignUp() {
     </>
   );
 }
-
-export default SignUp;

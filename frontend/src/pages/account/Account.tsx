@@ -2,13 +2,12 @@ import "./Account.css";
 
 import * as api from "../../api";
 
+import { Header, PasteTable } from "../../components";
 import { useEffect, useState } from "react";
 
-import { Header } from "../../components/header/Header";
-import { PasteView } from "../../components/pasteView/PasteView";
 import { useMeController } from "../../api";
 
-function Account() {
+export function Account() {
   const meController = useMeController();
 
   const [pastes, setPastes] = useState<api.Paste[]>([]);
@@ -47,18 +46,7 @@ function Account() {
           </div>
         ) : (
           <div className="account-paste-view__wrapper">
-            {pastes.map((paste) => {
-              return (
-                <PasteView
-                  paste={paste}
-                  ondelete={() => {
-                    setPastes((prevPastes) => {
-                      return prevPastes.filter((it) => it.id != paste.id);
-                    });
-                  }}
-                />
-              );
-            })}
+            <PasteTable pastes={pastes} />
           </div>
         )
       ) : (
@@ -69,5 +57,3 @@ function Account() {
     </div>
   );
 }
-
-export default Account;

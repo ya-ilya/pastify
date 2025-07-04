@@ -16,13 +16,13 @@ class PastifyApplication(
             return
         }
 
-        val ilya = userService.createUser(
+        userService.createUser(
             "Ilya",
             "ilya@mail.com",
             "password"
         )
 
-        val pavel = userService.createUser(
+        userService.createUser(
             "Pavel",
             "pavel@mail.com",
             "password"

@@ -1,13 +1,12 @@
 import "./Feed.css";
 
+import { Header, PasteTable } from "../../components";
 import { useCallback, useEffect, useState } from "react";
 
-import { Header } from "../../components/header/Header";
 import { Paste } from "../../api/models";
-import { PasteView } from "../../components/pasteView/PasteView";
 import { usePasteControllerWithoutAuthentication } from "../../api/controllers/PasteController";
 
-function Feed() {
+export function Feed() {
   const pasteController = usePasteControllerWithoutAuthentication();
   const [pastes, setPastes] = useState<Paste[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,18 +60,10 @@ function Feed() {
         </div>
       ) : (
         <div className="feed-paste-view__wrapper">
-          {pastes.map((paste) => (
-            <PasteView
-              key={paste.id}
-              paste={paste}
-              ondelete={() => {}}
-            />
-          ))}
+          <PasteTable pastes={pastes} />
           {isLoading && <div className="paste-view paste-view--loading">Загрузка...</div>}
         </div>
       )}
     </div>
   );
 }
-
-export default Feed;

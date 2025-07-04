@@ -2,16 +2,11 @@ import "./index.css";
 
 import * as api from "./api";
 
+import { Account, App, Feed, Paste, SignIn, SignUp } from "./pages";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import React, { useEffect } from "react";
 
-import Account from "./pages/account/Account.tsx";
-import App from "./pages/app/App.tsx";
-import Feed from "./pages/feed/Feed.tsx";
-import Paste from "./pages/paste/Paste.tsx";
 import ReactDOM from "react-dom/client";
-import SignIn from "./pages/login/SignIn.tsx";
-import SignUp from "./pages/signUp/SignUp.tsx";
 import { useLocalStorage } from "./hooks/index.ts";
 
 export * from "./config.ts";

@@ -6,9 +6,8 @@ import org.pastify.backend.entities.paste.PasteLanguage
 import org.pastify.backend.entities.paste.PasteRepository
 import org.pastify.backend.entities.user.User
 import org.pastify.backend.services.pagination.OffsetBasedPageRequest
-import org.springframework.cglib.core.Local
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
+import org.springframework.data.jpa.domain.JpaSort
 import org.springframework.http.HttpStatus
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
@@ -44,11 +43,17 @@ class PasteService(private val pasteRepository: PasteRepository) {
         limit: Int,
         offset: Int
     ): Page<Paste> {
-        return pasteRepository.findAllByExpiresOnAfterOrExpiresOnIsNullAndIsPrivateIsFalse(LocalDateTime.now(), OffsetBasedPageRequest(offset, limit))
+        return pasteRepository.findAllByExpiresOnAfterOrExpiresOnIsNullAndIsPrivateIsFalse(
+            LocalDateTime.now(),
+            OffsetBasedPageRequest(offset, limit, JpaSort.by("createdAt"))
+        )
     }
 
     fun getUserPastes(user: User): List<Paste> {
-        return pasteRepository.findAllByUserAndExpiresOnAfterOrExpiresOnIsNull(user, LocalDateTime.now())
+        return pasteRepository.findAllByUserAndExpiresOnAfterOrExpiresOnIsNull(
+            user,
+            LocalDateTime.now()
+        )
     }
 
     fun createPaste(

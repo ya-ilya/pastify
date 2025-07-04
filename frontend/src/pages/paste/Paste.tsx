@@ -2,13 +2,11 @@ import "./Paste.css";
 
 import * as api from "../../api";
 
+import { Header, PasteView } from "../../components";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Header } from "../../components/header/Header";
-import { PasteView } from "../../components/pasteView/PasteView";
-
-function Paste() {
+export function Paste() {
   const pasteController = api.usePasteControllerWithoutAuthentication();
 
   const [paste, setPaste] = useState<api.Paste | null>(null);
@@ -62,5 +60,3 @@ function Paste() {
     </div>
   );
 }
-
-export default Paste;

@@ -33,7 +33,7 @@ class SecurityConfiguration(
             .cors { cors: CorsConfigurer<HttpSecurity?> ->
                 cors.configurationSource {
                     val corsConfiguration = CorsConfiguration()
-                    corsConfiguration.setAllowedOriginPatterns(listOf("*"))
+                    corsConfiguration.allowedOriginPatterns = listOf("*")
                     corsConfiguration.allowedMethods = listOf(
                         "GET",
                         "POST",

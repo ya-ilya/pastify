@@ -1,8 +1,10 @@
 import "./Header.css";
 
-import { FaPlus, FaStream, FaUser } from "react-icons/fa";
+import { CiLogin, CiLogout, CiUser } from "react-icons/ci";
+import { FaPlus, FaStream } from "react-icons/fa";
 
 import { AuthenticationContext } from "../..";
+import { CgUserAdd } from "react-icons/cg";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -47,13 +49,15 @@ export function Header() {
             href="/signin"
             className="header__button header__button--outline"
           >
-            Войти
+            <CiLogin />
+            <span className="header__new-paste-text">Войти</span>
           </a>
           <a
             href="/signup"
             className="header__button"
           >
-            Зарегистрироваться
+            <CgUserAdd />
+            <span className="header__new-paste-text">Зарегестрироваться</span>
           </a>
         </div>
       ) : (
@@ -62,14 +66,15 @@ export function Header() {
             href="/account"
             className="header__button"
           >
-            <FaUser />
-            {session.username}
+            <CiUser />
+            <span className="header__new-paste-text">{session.username}</span>
           </a>
           <button
             onClick={handleLogout}
             className="header__button header__button--outline-logout"
           >
-            Выйти
+            <CiLogout />
+            <span className="header__new-paste-text">Выйти</span>
           </button>
         </div>
       )}
