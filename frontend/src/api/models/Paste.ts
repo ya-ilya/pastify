@@ -3,7 +3,7 @@ import { User } from "./User";
 export interface Paste {
   title?: string;
   content: string;
-  language: PasteLanguage;
+  syntax: PasteSyntax;
   expiresOn: Date;
   isPrivate: boolean;
   createdAt: Date;
@@ -11,7 +11,7 @@ export interface Paste {
   id: string;
 }
 
-export enum PasteLanguage {
+export enum PasteSyntax {
   oneC = "ONE_C",
   abnf = "ABNF",
   accesslog = "ACCESSLOG",

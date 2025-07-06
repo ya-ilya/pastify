@@ -36,7 +36,7 @@ export function PasteTable({ pastes }: { pastes: Paste[] }) {
               </span>
             </td>
             <td>
-              <span className="paste-table__syntax">{paste.language}</span>
+              <span className="paste-table__syntax">{paste.syntax}</span>
             </td>
           </tr>
         ))}

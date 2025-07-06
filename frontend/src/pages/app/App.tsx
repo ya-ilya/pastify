@@ -22,7 +22,7 @@ export function App() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [language, setLanguage] = useState(api.PasteLanguage.plaintext);
+  const [syntax, setSyntax] = useState(api.PasteSyntax.plaintext);
   const [expiration, setExpiration] = useState<number>(0);
   const [isPrivate, setIsPrivate] = useState(false);
 
@@ -34,14 +34,14 @@ export function App() {
       const paste = await pasteController.createPaste({
         title: title,
         content: content,
-        language: language,
+        syntax: syntax,
         expiration: expiration,
         isPrivate: isPrivate,
       });
       alert("Паста создана!");
       setTitle("");
       setContent("");
-      setLanguage(api.PasteLanguage.plaintext);
+      setSyntax(api.PasteSyntax.plaintext);
       setExpiration(0);
       setIsPrivate(false);
       navigate(`/${paste.id}`);
@@ -71,12 +71,12 @@ export function App() {
             disabled={!session}
           />
           <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value as api.PasteLanguage)}
+            value={syntax}
+            onChange={(e) => setSyntax(e.target.value as api.PasteSyntax)}
             className="paste-form__select"
             disabled={!session}
           >
-            {Object.entries(api.PasteLanguage).map(([key, value]) => (
+            {Object.entries(api.PasteSyntax).map(([key, value]) => (
               <option
                 key={key}
                 value={value}

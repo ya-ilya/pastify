@@ -2,7 +2,7 @@ package org.pastify.backend.services
 
 import org.apache.commons.lang3.RandomStringUtils
 import org.pastify.backend.entities.paste.Paste
-import org.pastify.backend.entities.paste.PasteLanguage
+import org.pastify.backend.entities.paste.PasteSyntax
 import org.pastify.backend.entities.paste.PasteRepository
 import org.pastify.backend.entities.user.User
 import org.pastify.backend.services.pagination.OffsetBasedPageRequest
@@ -60,7 +60,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
     fun createPaste(
         title: String?,
         content: String,
-        language: PasteLanguage,
+        syntax: PasteSyntax,
         expiration: Long?,
         isPrivate: Boolean,
         user: User
@@ -81,7 +81,7 @@ class PasteService(private val pasteRepository: PasteRepository) {
             Paste(
                 title,
                 content,
-                language,
+                syntax,
                 expiresOn,
                 isPrivate,
                 date,

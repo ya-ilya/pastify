@@ -1,6 +1,6 @@
 package org.pastify.backend.entities.paste
 
-enum class PasteLanguage {
+enum class PasteSyntax {
     ONE_C,
     ABNF,
     ACCESSLOG,

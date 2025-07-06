@@ -40,7 +40,7 @@ class PasteController(private val pasteService: PasteService) {
         return pasteService.createPaste(
             request.title,
             request.content,
-            request.language,
+            request.syntax,
             request.expiration,
             request.isPrivate,
             user

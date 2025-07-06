@@ -19,12 +19,6 @@
   padding-top: 80px;
 }
 
-@media (max-width: 1100px) {
-  .home {
-    padding-top: 80px;
-  }
-}
-
 .paste-form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   display: flex;
@@ -36,7 +30,6 @@
   padding: 32px;
   background: #fff;
   border-radius: 8px;
-  margin: 16px;
 }
 
 .paste-form__title {

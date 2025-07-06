@@ -11,7 +11,7 @@ class Paste(
     @Lob
     @Column(length = 16777215)
     var content: String,
-    var language: PasteLanguage,
+    var syntax: PasteSyntax,
     val expiresOn: LocalDateTime?,
     val isPrivate: Boolean,
     val createdAt: LocalDateTime,
@@ -24,7 +24,7 @@ class Paste(
         return PasteResponse(
             title,
             content,
-            language,
+            syntax,
             expiresOn,
             isPrivate,
             createdAt,

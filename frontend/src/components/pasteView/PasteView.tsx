@@ -67,7 +67,7 @@ export function PasteView(props: PasteViewProps) {
           <b>Автор:</b> {props.paste.user.username}
         </span>
         <span className="paste-view__meta-item">
-          <b>Язык:</b> {props.paste.language}
+          <b>Язык:</b> {props.paste.syntax}
         </span>
         <span className="paste-view__meta-item">
           <b>Приватность:</b> {props.paste.isPrivate ? "Приватная" : "Публичная"}
@@ -82,7 +82,7 @@ export function PasteView(props: PasteViewProps) {
         )}
       </div>
       <SyntaxHighlighter
-        language={api.getEnumKeyByValue(api.PasteLanguage, props.paste.language) || "plaintext"}
+        language={api.getEnumKeyByValue(api.PasteSyntax, props.paste.syntax) || "plaintext"}
         className="paste-view__content"
       >
         {props.paste.content}
