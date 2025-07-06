@@ -1,15 +1,17 @@
 import "./PasteTable.css";
 
 import { Paste } from "../../api/models";
+import { useTranslation } from "react-i18next";
 
 export function PasteTable({ pastes }: { pastes: Paste[] }) {
+  const { t } = useTranslation();
   return (
     <table className="paste-table__table">
       <thead>
         <tr>
-          <th>Название</th>
-          <th>Дата создания</th>
-          <th>Синтаксис</th>
+          <th>{t("pasteTable.title")}</th>
+          <th>{t("pasteTable.createdAt")}</th>
+          <th>{t("pasteTable.syntax")}</th>
         </tr>
       </thead>
       <tbody>
@@ -20,9 +22,11 @@ export function PasteTable({ pastes }: { pastes: Paste[] }) {
                 href={`/${paste.id}`}
                 className="paste-table__link"
               >
-                {paste.title || "Без названия"}
+                {paste.title || t("pasteTable.noTitle")}
               </a>
-              <div className="paste-table__author">Автор: {paste.user.username}</div>
+              <div className="paste-table__author">
+                {t("pasteTable.author")}: {paste.user.username}
+              </div>
             </td>
             <td>
               <span className="paste-table__date">

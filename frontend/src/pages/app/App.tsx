@@ -7,18 +7,11 @@ import { useContext, useState } from "react";
 
 import { AuthenticationContext } from "../..";
 import { useNavigate } from "react-router-dom";
-
-const expirationOptions = [
-  { value: 10, label: "10 минут" },
-  { value: 60, label: "1 час" },
-  { value: 24 * 60, label: "1 день" },
-  { value: 7 * 24 * 60, label: "1 неделя" },
-  { value: 30 * 24 * 60, label: "1 месяц" },
-  { value: null, label: "Без ограничения" },
-];
+import { useTranslation } from "react-i18next";
 
 export function App() {
   const pasteController = api.usePasteController();
+  const { t } = useTranslation();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -27,6 +20,15 @@ export function App() {
   const [isPrivate, setIsPrivate] = useState(false);
 
   const navigate = useNavigate();
+
+  const expirationOptions = [
+    { value: 10, label: t("expiration.10min") },
+    { value: 60, label: t("expiration.1hour") },
+    { value: 24 * 60, label: t("expiration.1day") },
+    { value: 7 * 24 * 60, label: t("expiration.1week") },
+    { value: 30 * 24 * 60, label: t("expiration.1month") },
+    { value: null, label: t("expiration.unlimited") },
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ export function App() {
         expiration: expiration,
         isPrivate: isPrivate,
       });
-      alert("Паста создана!");
+      alert(t("paste.created"));
       setTitle("");
       setContent("");
       setSyntax(api.PasteSyntax.plaintext);
@@ -47,7 +49,7 @@ export function App() {
       navigate(`/${paste.id}`);
     } catch (err) {
       console.error("Failed to create paste:", err);
-      alert("Ошибка при создании пасты");
+      alert(t("paste.createError"));
     }
   };
 
@@ -61,10 +63,10 @@ export function App() {
           onSubmit={handleSubmit}
           className={`paste-form${!session ? " paste-form--blurred" : ""}`}
         >
-          <h1 className="paste-form__title">Создать новую пасту</h1>
+          <h1 className="paste-form__title">{t("pasteForm.title")}</h1>
           <input
             type="text"
-            placeholder="Заголовок (необязательно)"
+            placeholder={t("pasteForm.placeholderTitle")}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="paste-form__input"
@@ -113,11 +115,11 @@ export function App() {
               htmlFor="private"
               className="paste-form__checkbox-label"
             >
-              Приватная паста
+              {t("pasteForm.private")}
             </label>
           </div>
           <textarea
-            placeholder="Вставьте ваш текст или код сюда..."
+            placeholder={t("pasteForm.placeholderContent")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={12}
@@ -129,12 +131,12 @@ export function App() {
             className="paste-form__submit"
             disabled={!session}
           >
-            Создать
+            {t("pasteForm.create")}
           </button>
         </form>
         {!session && (
           <div className="paste-form__overlay">
-            <span className="paste-form__overlay-text">Чтобы создать новую пасту, войдите в аккаунт</span>
+            <span className="paste-form__overlay-text">{t("pasteForm.needLogin")}</span>
           </div>
         )}
       </div>

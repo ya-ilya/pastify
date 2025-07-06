@@ -5,6 +5,7 @@ import * as api from "../../api";
 import { Header, PasteView } from "../../components";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function Paste() {
   const pasteController = api.usePasteControllerWithoutAuthentication();
@@ -14,6 +15,7 @@ export function Paste() {
 
   const params = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsLoading(true);
@@ -50,11 +52,11 @@ export function Paste() {
         </div>
       ) : isLoading ? (
         <div className="paste-paste-view__wrapper">
-          <div className="paste-view paste-view--loading">Загрузка...</div>
+          <div className="paste-view paste-view--loading">{t("paste.loading")}</div>
         </div>
       ) : (
         <div className="paste-paste-view__wrapper">
-          <div className="paste-view paste-view--error">Паста не найдена</div>
+          <div className="paste-view paste-view--error">{t("paste.notFound")}</div>
         </div>
       )}
     </div>

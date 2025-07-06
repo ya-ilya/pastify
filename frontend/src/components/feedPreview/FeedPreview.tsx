@@ -1,10 +1,11 @@
 import "./FeedPreview.css";
 
 import * as api from "../../api";
+import { useTranslation } from "react-i18next";
 
 import { useEffect, useState } from "react";
 
-function formatTimeAgo(dateString: string | Date) {
+function formatTimeAgo(dateString: string | Date, t: any) {
   const date = typeof dateString === "string" ? new Date(dateString) : dateString;
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
@@ -14,15 +15,30 @@ function formatTimeAgo(dateString: string | Date) {
 
   if (diffHour < 24) {
     if (diffHour >= 1) {
-      return `${diffHour} ${plural(diffHour, "час", "часа", "часов")} назад`;
+      return `${diffHour} ${plural(
+        diffHour,
+        t("feedPreview.oneHour"),
+        t("feedPreview.fewHours"),
+        t("feedPreview.manyHours")
+      )} ${t("feedPreview.ago")}`;
     }
     if (diffMin >= 1) {
-      return `${diffMin} ${plural(diffMin, "минута", "минуты", "минут")} назад`;
+      return `${diffMin} ${plural(
+        diffMin,
+        t("feedPreview.oneMinute"),
+        t("feedPreview.fewMinutes"),
+        t("feedPreview.manyMinutes")
+      )} ${t("feedPreview.ago")}`;
     }
     if (diffSec < 10) {
-      return "Только что";
+      return t("feedPreview.justNow");
     }
-    return `${diffSec} ${plural(diffSec, "секунда", "секунды", "секунд")} назад`;
+    return `${diffSec} ${plural(
+      diffSec,
+      t("feedPreview.oneSecond"),
+      t("feedPreview.fewSeconds"),
+      t("feedPreview.manySeconds")
+    )} ${t("feedPreview.ago")}`;
   }
 
   return date.toLocaleString(undefined, {
@@ -48,6 +64,7 @@ export function FeedPreview() {
 
   const [pastes, setPastes] = useState<api.Paste[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setPastes([]);
@@ -74,14 +91,14 @@ export function FeedPreview() {
           href="/feed"
           className="feed-preview__header-link"
         >
-          <h1>Последние пасты</h1>
+          <h1>{t("feedPreview.latestPastes")}</h1>
         </a>
       </div>
       <div className="feed-preview__content">
         {pastes.length === 0 && !isLoading ? (
-          <div className="feed-preview__empty">Нет паст</div>
+          <div className="feed-preview__empty">{t("feedPreview.noPastes")}</div>
         ) : isLoading ? (
-          <div className="feed-preview__loading">Загрузка...</div>
+          <div className="feed-preview__loading">{t("feedPreview.loading")}</div>
         ) : (
           pastes.map((paste) => {
             return (
@@ -91,9 +108,11 @@ export function FeedPreview() {
                 key={paste.id}
               >
                 <div className="feed-preview__paste">
-                  <h2>{paste.title || "Без названия"}</h2>
-                  <span className="feed-preview__paste-author">Автор: {paste.user.username}</span>
-                  <span className="feed-preview__paste-date">{formatTimeAgo(paste.createdAt)}</span>
+                  <h2>{paste.title || t("feedPreview.noTitle")}</h2>
+                  <span className="feed-preview__paste-author">
+                    {t("feedPreview.author")}: {paste.user.username}
+                  </span>
+                  <span className="feed-preview__paste-date">{formatTimeAgo(paste.createdAt, t)}</span>
                 </div>
               </a>
             );

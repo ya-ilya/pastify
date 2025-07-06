@@ -1,6 +1,7 @@
 import "./SignIn.css";
 
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AuthenticationContext } from "../..";
 import { Header } from "../../components";
@@ -10,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 export function SignIn() {
   const authController = useAuthenticationController();
   const [session, setSession] = useContext(AuthenticationContext);
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +31,7 @@ export function SignIn() {
     setError(null);
 
     if (!email.trim() || !password.trim()) {
-      setError("Введите email и пароль");
+      setError(t("signin.enterEmailPassword"));
       return;
     }
 
@@ -40,10 +42,10 @@ export function SignIn() {
         password: password.trim(),
       });
       setSession(response);
-      alert("Вход выполнен!");
+      alert(t("signin.success"));
       navigate("/");
     } catch (error: any) {
-      setError(error?.response?.data?.message || "Ошибка входа");
+      setError(error?.response?.data?.message || t("signin.error"));
     } finally {
       setLoading(false);
     }
@@ -53,7 +55,7 @@ export function SignIn() {
     <>
       <Header />
       <div className="login-page">
-        <h2 className="login-title">Вход</h2>
+        <h2 className="login-title">{t("signin.title")}</h2>
         <form
           className="login-form"
           onSubmit={handleSubmit}
@@ -69,7 +71,7 @@ export function SignIn() {
           />
           <input
             type="password"
-            placeholder="Пароль"
+            placeholder={t("signin.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -81,7 +83,7 @@ export function SignIn() {
             disabled={loading}
             className="login-submit"
           >
-            {loading ? "Вход..." : "Войти"}
+            {loading ? t("signin.loading") : t("signin.signin")}
           </button>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import "./SignUp.css";
 
 import { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AuthenticationContext } from "../..";
 import { Header } from "../../components";
@@ -10,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 export function SignUp() {
   const authController = useAuthenticationController();
   const [session, setSession] = useContext(AuthenticationContext);
+  const { t } = useTranslation();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -31,11 +33,11 @@ export function SignUp() {
     setError(null);
 
     if (!username.trim() || !email.trim() || !password.trim()) {
-      setError("Введите имя пользователя, email и пароль");
+      setError(t("signup.enterAllFields"));
       return;
     }
     if (password !== confirm) {
-      setError("Пароли не совпадают");
+      setError(t("signup.passwordsDontMatch"));
       return;
     }
 
@@ -47,10 +49,10 @@ export function SignUp() {
         password: password.trim(),
       });
       setSession(response);
-      alert("Регистрация успешна!");
+      alert(t("signup.success"));
       navigate("/");
     } catch (error: any) {
-      setError(error?.response?.data?.message || "Ошибка регистрации");
+      setError(error?.response?.data?.message || t("signup.error"));
     } finally {
       setLoading(false);
     }
@@ -60,14 +62,14 @@ export function SignUp() {
     <>
       <Header />
       <div className="signup-page">
-        <h2 className="signup-title">Регистрация</h2>
+        <h2 className="signup-title">{t("signup.title")}</h2>
         <form
           className="signup-form"
           onSubmit={handleSubmit}
         >
           <input
             type="text"
-            placeholder="Имя пользователя"
+            placeholder={t("signup.username")}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             autoFocus
@@ -84,7 +86,7 @@ export function SignUp() {
           />
           <input
             type="password"
-            placeholder="Пароль"
+            placeholder={t("signup.password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -92,7 +94,7 @@ export function SignUp() {
           />
           <input
             type="password"
-            placeholder="Повторите пароль"
+            placeholder={t("signup.confirmPassword")}
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             required
@@ -104,7 +106,7 @@ export function SignUp() {
             disabled={loading}
             className="signup-submit"
           >
-            {loading ? "Регистрация..." : "Зарегистрироваться"}
+            {loading ? t("signup.loading") : t("signup.signup")}
           </button>
         </form>
       </div>

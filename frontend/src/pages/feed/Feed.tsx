@@ -2,12 +2,14 @@ import "./Feed.css";
 
 import { Header, PasteTable } from "../../components";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Paste } from "../../api/models";
 import { usePasteControllerWithoutAuthentication } from "../../api/controllers/PasteController";
 
 export function Feed() {
   const pasteController = usePasteControllerWithoutAuthentication();
+  const { t } = useTranslation();
   const [pastes, setPastes] = useState<Paste[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
@@ -52,16 +54,16 @@ export function Feed() {
       <Header />
       {pastes.length === 0 && !isLoading ? (
         <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
-          <div className="paste-view paste-view--loading">Нет паст</div>
+          <div className="paste-view paste-view--loading">{t("feed.noPastes")}</div>
         </div>
       ) : isLoading && pastes.length === 0 ? (
         <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
-          <div className="paste-view paste-view--loading">Загрузка...</div>
+          <div className="paste-view paste-view--loading">{t("feed.loading")}</div>
         </div>
       ) : (
         <div className="feed-paste-view__wrapper">
           <PasteTable pastes={pastes} />
-          {isLoading && <div className="paste-view paste-view--loading">Загрузка...</div>}
+          {isLoading && <div className="paste-view paste-view--loading">{t("feed.loading")}</div>}
         </div>
       )}
     </div>

@@ -4,11 +4,13 @@ import * as api from "../../api";
 
 import { Header, PasteTable } from "../../components";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useMeController } from "../../api";
 
 export function Account() {
   const meController = useMeController();
+  const { t } = useTranslation();
 
   const [pastes, setPastes] = useState<api.Paste[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +44,7 @@ export function Account() {
       {!isLoading ? (
         pastes.length === 0 ? (
           <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
-            <div className="paste-view paste-view--loading">Вы еще не создавали паст</div>
+            <div className="paste-view paste-view--loading">{t("account.noPastes")}</div>
           </div>
         ) : (
           <div className="account-paste-view__wrapper">
@@ -51,7 +53,7 @@ export function Account() {
         )
       ) : (
         <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
-          <div className="paste-view paste-view--loading">Загрузка...</div>
+          <div className="paste-view paste-view--loading">{t("account.loading")}</div>
         </div>
       )}
     </div>
