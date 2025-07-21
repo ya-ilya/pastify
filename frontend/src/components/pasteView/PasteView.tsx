@@ -4,10 +4,10 @@ import * as api from "../../api";
 
 import { FaCopy, FaTrash } from "react-icons/fa";
 import { useCallback, useContext } from "react";
-import { useTranslation } from "react-i18next";
 
 import { AuthenticationContext } from "../..";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { useTranslation } from "react-i18next";
 
 type PasteViewProps = {
   paste: api.Paste;
@@ -24,6 +24,11 @@ export function PasteView(props: PasteViewProps) {
     navigator.clipboard.writeText(window.location.href);
     alert(t("pasteView.linkCopied"));
   }, [t]);
+
+  const handleCopyRaw = useCallback(() => {
+    navigator.clipboard.writeText(props.paste.content);
+    alert(t("pasteView.rawCopied"));
+  }, [props.paste.content, t]);
 
   const handleDelete = useCallback(() => {
     if (window.confirm(t("pasteView.confirmDelete"))) {
@@ -42,41 +47,20 @@ export function PasteView(props: PasteViewProps) {
 
   return (
     <div className="paste-view">
-      <div className="paste-view__actions">
-        <button
-          className="paste-view__copy-link"
-          onClick={handleCopyLink}
-          title={t("pasteView.copyLink")}
-        >
-          <FaCopy />
-        </button>
-        {props.paste.user.id === session?.userId && (
-          <button
-            className="paste-view__delete-link"
-            onClick={handleDelete}
-            title={t("pasteView.deletePaste")}
-          >
-            <FaTrash />
-          </button>
-        )}
-      </div>
-      <h1 className="paste-view__title">{props.paste.title || t("pasteView.noTitle")}</h1>
+      <div className="paste-view__title">{props.paste.title || t("pasteView.noTitle")}</div>
       <div className="paste-view__meta">
-        <span className="paste-view__meta-item">
-          <b>ID:</b> {props.paste.id}
-        </span>
         <span className="paste-view__meta-item">
           <b>{t("pasteView.author")}:</b> {props.paste.user.username}
         </span>
         <span className="paste-view__meta-item">
-          <b>{t("pasteView.syntax")}:</b> {props.paste.syntax}
+          <b>{t("pasteView.created")}:</b> {new Date(props.paste.createdAt).toLocaleString()}
+        </span>
+        <span className="paste-view__meta-item">
+          <b>ID:</b> {props.paste.id}
         </span>
         <span className="paste-view__meta-item">
           <b>{t("pasteView.privacy")}:</b>{" "}
           {props.paste.isPrivate ? t("pasteView.private") : t("pasteView.public")}
-        </span>
-        <span className="paste-view__meta-item">
-          <b>{t("pasteView.created")}:</b> {new Date(props.paste.createdAt).toLocaleString()}
         </span>
         {props.paste.expiresOn && (
           <span className="paste-view__meta-item paste-view__meta-item--expires">
@@ -84,9 +68,43 @@ export function PasteView(props: PasteViewProps) {
           </span>
         )}
       </div>
+      <div className="paste-view__content-panel">
+        <div className="paste-view__content-panel__left">
+          <div className="paste-view__syntax">{props.paste.syntax}</div>
+        </div>
+        <div className="paste-view__content-panel__right">
+          <button
+            className="paste-view__copy-link"
+            onClick={handleCopyLink}
+            title={t("pasteView.copyLink")}
+          >
+            <FaCopy />
+            {t("pasteView.link")}
+          </button>
+          <button
+            className="paste-view__copy-raw"
+            onClick={handleCopyRaw}
+            title={t("pasteView.copyRaw")}
+          >
+            <FaCopy />
+            {t("pasteView.raw")}
+          </button>
+          {props.paste.user.id === session?.userId && (
+            <button
+              className="paste-view__delete-link"
+              onClick={handleDelete}
+              title={t("pasteView.deletePaste")}
+            >
+              <FaTrash />
+              {t("pasteView.deletePaste")}
+            </button>
+          )}
+        </div>
+      </div>
       <SyntaxHighlighter
         language={api.getEnumKeyByValue(api.PasteSyntax, props.paste.syntax) || "plaintext"}
         className="paste-view__content"
+        showLineNumbers
       >
         {props.paste.content}
       </SyntaxHighlighter>

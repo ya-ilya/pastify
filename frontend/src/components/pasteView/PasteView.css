@@ -2,7 +2,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   padding: 32px;
   background: #fff;
   border-radius: 8px;
@@ -31,13 +31,12 @@
   font-size: 26px;
   font-weight: 700;
   color: #222;
-  text-align: center;
 }
 
 .paste-view__meta {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: row;
   gap: 18px;
   margin-bottom: 18px;
   font-size: 15px;
@@ -53,6 +52,22 @@
 .paste-view__meta-item--expires {
   background: #fffbe6;
   color: #b8860b;
+}
+
+.paste-view__content-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paste-view__content-panel__left,
+.paste-view__content-panel__right {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
 .paste-view__content {
@@ -71,45 +86,33 @@
   height: 100%;
 }
 
-.paste-view__actions {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  display: flex;
-  gap: 8px;
-}
-
-.paste-view__copy-link {
-  width: 32px;
-  height: 32px;
-  padding: 0;
+.paste-view__copy-link,
+.paste-view__copy-raw,
+.paste-view__syntax {
+  padding: 2px 4px 2px 4px;
   background: #f7f8fa;
   border: 1px solid #4a90e2;
-  border-radius: 50%;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #4a90e2;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
+  gap: 4px;
 }
 
-.paste-view__copy-link:hover {
+.paste-view__copy-link:hover,
+.paste-view__copy-raw:hover {
   background: #e6f0fa;
   border-color: #357ab8;
 }
 
-.paste-view__copy-link svg {
-  display: block;
-}
-
 .paste-view__delete-link {
-  width: 32px;
-  height: 32px;
-  padding: 0;
+  padding: 2px 4px 2px 4px;
   background: #f7f8fa;
   border: 1px solid #e74c3c;
-  border-radius: 50%;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;

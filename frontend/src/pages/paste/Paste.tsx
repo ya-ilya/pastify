@@ -5,6 +5,7 @@ import * as api from "../../api";
 import { Header, PasteView } from "../../components";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { useTranslation } from "react-i18next";
 
 export function Paste() {

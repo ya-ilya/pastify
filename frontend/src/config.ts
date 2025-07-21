@@ -1,5 +1,5 @@
-import axios from "axios";
 import LanguageDetector from "i18next-browser-languagedetector";
+import axios from "axios";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -57,15 +57,18 @@ i18n
           "signup.success": "Registration successful!",
           "signup.error": "Registration error",
           "pasteView.linkCopied": "Link copied!",
+          "pasteView.rawCopied": "Raw text copied!",
           "pasteView.confirmDelete": "Are you sure you want to delete this paste?",
           "pasteView.deleted": "Paste deleted successfully!",
           "pasteView.deleteErrorLog": "Error deleting paste:",
           "pasteView.deleteError": "Failed to delete paste. Try again later.",
           "pasteView.copyLink": "Copy link",
+          "pasteView.copyRaw": "Copy raw",
+          "pasteView.link": "Link",
+          "pasteView.raw": "Raw",
           "pasteView.deletePaste": "Delete paste",
           "pasteView.noTitle": "No title",
           "pasteView.author": "Author",
-          "pasteView.syntax": "Syntax",
           "pasteView.privacy": "Privacy",
           "pasteView.private": "Private",
           "pasteView.public": "Public",
@@ -139,15 +142,18 @@ i18n
           "signup.success": "Регистрация успешна!",
           "signup.error": "Ошибка регистрации",
           "pasteView.linkCopied": "Ссылка скопирована!",
+          "pasteView.rawCopied": "Raw-текст скопирован!",
           "pasteView.confirmDelete": "Вы уверены, что хотите удалить эту пасту?",
           "pasteView.deleted": "Паста успешно удалена!",
           "pasteView.deleteErrorLog": "Ошибка при удалении пасты:",
           "pasteView.deleteError": "Не удалось удалить пасту. Попробуйте позже.",
           "pasteView.copyLink": "Скопировать ссылку",
+          "pasteView.copyRaw": "Скопировать Raw-текст",
+          "pasteView.link": "Ссылка",
+          "pasteView.raw": "Raw",
           "pasteView.deletePaste": "Удалить пасту",
           "pasteView.noTitle": "Без заголовка",
           "pasteView.author": "Автор",
-          "pasteView.syntax": "Язык",
           "pasteView.privacy": "Приватность",
           "pasteView.private": "Приватная",
           "pasteView.public": "Публичная",
