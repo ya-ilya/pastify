@@ -2,6 +2,7 @@ import "./Header.css";
 
 import { CiLogin, CiLogout, CiUser } from "react-icons/ci";
 import { FaPlus, FaStream } from "react-icons/fa";
+import { GB, RU } from "country-flag-icons/react/3x2";
 import { useContext, useState } from "react";
 
 import { AuthenticationContext } from "../..";
@@ -58,12 +59,14 @@ export function Header() {
             className={`header__lang-btn${language === "ru" ? " header__lang-btn--active" : ""}`}
             onClick={() => handleLanguageChange("ru")}
           >
+            <RU />
             RU
           </button>
           <button
             className={`header__lang-btn${language === "en" ? " header__lang-btn--active" : ""}`}
             onClick={() => handleLanguageChange("en")}
           >
+            <GB />
             EN
           </button>
         </div>

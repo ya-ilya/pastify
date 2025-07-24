@@ -7,11 +7,11 @@ export default defineConfig({
     sourcemap: true,
     commonjsOptions: {
       transformMixedEsModules: true,
-    }
+    },
   },
   server: {
     host: "0.0.0.0",
     port: 8080,
-    strictPort: true
+    strictPort: true,
   },
 });

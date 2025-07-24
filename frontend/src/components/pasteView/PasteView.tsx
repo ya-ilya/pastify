@@ -2,11 +2,12 @@ import "./PasteView.css";
 
 import * as api from "../../api";
 
+import { FaCalendarAlt, FaClock, FaKey, FaLock, FaUnlock, FaUser } from "react-icons/fa";
 import { FaCopy, FaTrash } from "react-icons/fa";
 import { useCallback, useContext } from "react";
 
 import { AuthenticationContext } from "../..";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { useTranslation } from "react-i18next";
 
 type PasteViewProps = {
@@ -48,24 +49,43 @@ export function PasteView(props: PasteViewProps) {
   return (
     <div className="paste-view">
       <div className="paste-view__title">{props.paste.title || t("pasteView.noTitle")}</div>
-      <div className="paste-view__meta">
-        <span className="paste-view__meta-item">
-          <b>{t("pasteView.author")}:</b> {props.paste.user.username}
-        </span>
-        <span className="paste-view__meta-item">
-          <b>{t("pasteView.created")}:</b> {new Date(props.paste.createdAt).toLocaleString()}
-        </span>
-        <span className="paste-view__meta-item">
-          <b>ID:</b> {props.paste.id}
-        </span>
-        <span className="paste-view__meta-item">
-          <b>{t("pasteView.privacy")}:</b>{" "}
-          {props.paste.isPrivate ? t("pasteView.private") : t("pasteView.public")}
-        </span>
-        {props.paste.expiresOn && (
-          <span className="paste-view__meta-item paste-view__meta-item--expires">
-            <b>{t("pasteView.expires")}:</b> {new Date(props.paste.expiresOn).toLocaleString()}
+      <div className="paste-view__meta-table">
+        <div className="paste-view__meta-row">
+          <span className="paste-view__meta-icon">
+            <FaUser />
           </span>
+          <span className="paste-view__meta-label">{t("pasteView.author")}</span>
+          <span className="paste-view__meta-value">{props.paste.user.username}</span>
+        </div>
+        <div className="paste-view__meta-row">
+          <span className="paste-view__meta-icon">
+            <FaCalendarAlt />
+          </span>
+          <span className="paste-view__meta-label">{t("pasteView.created")}</span>
+          <span className="paste-view__meta-value">{new Date(props.paste.createdAt).toLocaleString()}</span>
+        </div>
+        <div className="paste-view__meta-row">
+          <span className="paste-view__meta-icon">
+            <FaKey />
+          </span>
+          <span className="paste-view__meta-label">ID</span>
+          <span className="paste-view__meta-value">{props.paste.id}</span>
+        </div>
+        <div className="paste-view__meta-row">
+          <span className="paste-view__meta-icon">{props.paste.isPrivate ? <FaLock /> : <FaUnlock />}</span>
+          <span className="paste-view__meta-label">{t("pasteView.privacy")}</span>
+          <span className="paste-view__meta-value">
+            {props.paste.isPrivate ? t("pasteView.private") : t("pasteView.public")}
+          </span>
+        </div>
+        {props.paste.expiresOn && (
+          <div className="paste-view__meta-row paste-view__meta-row--expires">
+            <span className="paste-view__meta-icon">
+              <FaClock />
+            </span>
+            <span className="paste-view__meta-label">{t("pasteView.expires")}</span>
+            <span className="paste-view__meta-value">{new Date(props.paste.expiresOn).toLocaleString()}</span>
+          </div>
         )}
       </div>
       <div className="paste-view__content-panel">
