@@ -2,7 +2,7 @@ import "./Account.css";
 
 import * as api from "../../api";
 
-import { Header, PasteTable } from "../../components";
+import { FeedPreview, Header, PasteTable } from "../../components";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -48,6 +48,7 @@ export function Account() {
           </div>
         ) : (
           <div className="account-paste-view__wrapper">
+            <div className="account__section-label">{t("account.sectionLabel")}</div>
             <PasteTable pastes={pastes} />
           </div>
         )
@@ -56,6 +57,7 @@ export function Account() {
           <div className="paste-view paste-view--loading">{t("account.loading")}</div>
         </div>
       )}
+      <FeedPreview />
     </div>
   );
 }

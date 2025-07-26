@@ -18,6 +18,7 @@
   position: sticky;
   top: 96px;
   z-index: 2;
+  height: fit-content;
 }
 
 @media (max-width: 1100px) {

@@ -62,6 +62,7 @@ export function Feed() {
         </div>
       ) : (
         <div className="feed-paste-view__wrapper">
+          <div className="feed__section-label">{t("feed.sectionLabel")}</div>
           <PasteTable pastes={pastes} />
           {isLoading && <div className="paste-view paste-view--loading">{t("feed.loading")}</div>}
         </div>
