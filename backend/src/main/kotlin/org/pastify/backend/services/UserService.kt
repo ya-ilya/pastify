@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 
 @Service
@@ -28,7 +30,8 @@ class UserService(
             User(
                 username,
                 email,
-                passwordEncoder.encode(password)
+                passwordEncoder.encode(password),
+                LocalDateTime.now(ZoneOffset.UTC)
             )
         )
     }
