@@ -1,15 +1,13 @@
 import "./Account.css";
 
-import * as api from "../../api";
-
-import { FeedPreview, Header, PasteTable } from "../../components";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useMeController } from "../../api";
+import * as api from "../../api";
+import { FeedPreview, Header, PasteTable } from "../../components";
 
 export function Account() {
-  const meController = useMeController();
+  const meController = api.useMeController();
   const { t } = useTranslation();
 
   const [pastes, setPastes] = useState<api.Paste[]>([]);

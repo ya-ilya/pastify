@@ -1,8 +1,8 @@
-import { AuthenticationContext, Session, axiosClient } from "../..";
-import { Paste, User } from "../models";
+import { Axios } from "axios";
 import { useContext, useEffect, useState } from "react";
 
-import { Axios } from "axios";
+import { AuthenticationContext, axiosClient, Session } from "../..";
+import { Paste, User } from "../models";
 import { Controller } from "./Controller";
 
 export function useMeController() {

@@ -2,11 +2,11 @@ import "./SignIn.css";
 
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { AuthenticationContext } from "../..";
-import { Header } from "../../components";
 import { useAuthenticationController } from "../../api/controllers/AuthenticationController";
-import { useNavigate } from "react-router-dom";
+import { Header } from "../../components";
 
 export function SignIn() {
   const authController = useAuthenticationController();

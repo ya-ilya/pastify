@@ -1,9 +1,9 @@
 import "./FeedPreview.css";
 
-import * as api from "../../api";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useEffect, useState } from "react";
+import * as api from "../../api";
 
 function formatTimeAgo(dateString: string | Date, t: any) {
   const date = typeof dateString === "string" ? new Date(dateString) : dateString;

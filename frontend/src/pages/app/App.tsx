@@ -1,13 +1,12 @@
 import "./App.css";
 
-import * as api from "../../api";
-
-import { FeedPreview, Header } from "../../components";
 import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { AuthenticationContext } from "../..";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import * as api from "../../api";
+import { FeedPreview, Header } from "../../components";
 
 export function App() {
   const pasteController = api.usePasteController();

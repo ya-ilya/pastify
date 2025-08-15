@@ -1,11 +1,11 @@
 import "./Feed.css";
 
-import { Header, PasteTable } from "../../components";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Paste } from "../../api/models";
 import { usePasteControllerWithoutAuthentication } from "../../api/controllers/PasteController";
+import { Paste } from "../../api/models";
+import { Header, PasteTable } from "../../components";
 
 export function Feed() {
   const pasteController = usePasteControllerWithoutAuthentication();

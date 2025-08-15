@@ -1,13 +1,12 @@
 import "./index.css";
 
-import * as api from "./api";
-
-import { Account, App, Feed, Paste, SignIn, SignUp } from "./pages";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import React, { useEffect } from "react";
-
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+
+import * as api from "./api";
 import { useLocalStorage } from "./hooks/index.ts";
+import { Account, App, Feed, Paste, SignIn, SignUp } from "./pages";
 
 export * from "./config.ts";
 

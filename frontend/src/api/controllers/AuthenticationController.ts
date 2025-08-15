@@ -1,9 +1,11 @@
-import { AuthenticationResponse, RefreshTokenRequest, SignInRequest, SignUpRequest } from "../models";
-
 import { Axios } from "axios";
-import { Controller } from "./Controller";
-import { axiosClient } from "../..";
 import { useState } from "react";
+
+import { axiosClient } from "../..";
+import {
+    AuthenticationResponse, RefreshTokenRequest, SignInRequest, SignUpRequest
+} from "../models";
+import { Controller } from "./Controller";
 
 export function useAuthenticationController() {
   const [authenticationController] = useState(createAuthenticationController());
