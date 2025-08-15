@@ -1,5 +1,5 @@
 export interface User {
   username: string;
-  registeredAt: Date;
+  registeredOn: Date;
   id?: string;
 }

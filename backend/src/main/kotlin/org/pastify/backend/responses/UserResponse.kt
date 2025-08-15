@@ -5,6 +5,6 @@ import java.util.*
 
 class UserResponse(
     val username: String,
-    val registeredAt: LocalDateTime,
+    val registeredOn: LocalDateTime,
     val id: UUID
 )

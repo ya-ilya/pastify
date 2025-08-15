@@ -15,7 +15,7 @@ class User(
     val email: String,
     @get:JvmName("passwordField")
     val password: String,
-    val registeredAt: LocalDateTime,
+    val registeredOn: LocalDateTime,
     var refreshToken: String? = null,
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val pastes: MutableList<Paste> = mutableListOf(),
@@ -54,7 +54,7 @@ class User(
     fun toResponse(): UserResponse {
         return UserResponse(
             username,
-            registeredAt,
+            registeredOn,
             id!!
         )
     }

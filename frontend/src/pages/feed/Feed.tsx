@@ -1,5 +1,6 @@
 import "./Feed.css";
 
+import { Card } from "primereact/card";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -37,8 +38,7 @@ export function Feed() {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop >=
-          document.documentElement.offsetHeight - 200 &&
+        window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 200 &&
         !isLoading &&
         hasMore
       ) {
@@ -54,17 +54,30 @@ export function Feed() {
       <Header />
       {pastes.length === 0 && !isLoading ? (
         <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
-          <div className="paste-view paste-view--loading">{t("feed.noPastes")}</div>
+          <Card className="feed-card">
+            <div className="paste--loading">{t("feed.noPastes")}</div>
+          </Card>
         </div>
       ) : isLoading && pastes.length === 0 ? (
         <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
-          <div className="paste-view paste-view--loading">{t("feed.loading")}</div>
+          <Card className="feed-card">
+            <div className="paste--loading">{t("feed.loading")}</div>
+          </Card>
         </div>
       ) : (
         <div className="feed-paste-view__wrapper">
-          <div className="feed__section-label">{t("feed.sectionLabel")}</div>
-          <PasteTable pastes={pastes} />
-          {isLoading && <div className="paste-view paste-view--loading">{t("feed.loading")}</div>}
+          <Card className="feed-card">
+            <div className="feed__section-label">{t("feed.sectionLabel")}</div>
+            <PasteTable pastes={pastes} />
+            {isLoading && (
+              <div
+                className="paste--loading"
+                style={{ marginTop: 12 }}
+              >
+                {t("feed.loading")}
+              </div>
+            )}
+          </Card>
         </div>
       )}
     </div>

@@ -1,16 +1,18 @@
 .signup-page {
-  max-width: 400px;
-  margin: 60px auto;
-  background: #fff;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.signup-card {
+  padding: 24px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  padding: 32px;
 }
 
 .signup-title {
   text-align: center;
-  margin-bottom: 24px;
-  font-size: 24px;
+  margin-bottom: 16px;
+  font-size: 22px;
   font-weight: 700;
   color: #222;
 }
@@ -18,32 +20,29 @@
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-
-.signup-input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  gap: 12px;
 }
 
 .signup-error {
   color: #e74c3c;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
 }
 
-.signup-submit {
-  padding: 10px 0;
-  font-size: 16px;
-  font-weight: 600;
-  background: #4a90e2;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.15s;
+.signup-actions {
+  margin-top: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .signup-submit:disabled {

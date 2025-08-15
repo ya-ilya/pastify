@@ -1,5 +1,6 @@
 import "./FeedPreview.css";
 
+import { Card } from "primereact/card";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -86,39 +87,42 @@ export function FeedPreview() {
 
   return (
     <div className="feed-preview">
-      <div className="feed-preview__header">
-        <a
-          href="/feed"
-          className="feed-preview__header-link"
-        >
-          <h1>{t("feedPreview.latestPastes")}</h1>
-        </a>
-      </div>
-      <div className="feed-preview__content">
-        {pastes.length === 0 && !isLoading ? (
-          <div className="feed-preview__empty">{t("feedPreview.noPastes")}</div>
-        ) : isLoading ? (
-          <div className="feed-preview__loading">{t("feedPreview.loading")}</div>
-        ) : (
-          pastes.map((paste) => {
-            return (
-              <a
-                href={`/${paste.id}`}
-                className="feed-preview__paste-link"
-                key={paste.id}
-              >
-                <div className="feed-preview__paste">
-                  <h2>{paste.title || t("feedPreview.noTitle")}</h2>
-                  <span className="feed-preview__paste-author">
-                    {t("feedPreview.author")}: {paste.user.username}
-                  </span>
-                  <span className="feed-preview__paste-date">{formatTimeAgo(paste.createdAt, t)}</span>
-                </div>
-              </a>
-            );
-          })
-        )}
-      </div>
+      <Card className="feed-preview-card">
+        <div className="feed-preview__header">
+          <a
+            href="/feed"
+            className="feed-preview__header-link"
+          >
+            <h1>{t("feedPreview.latestPastes")}</h1>
+          </a>
+        </div>
+
+        <div className="feed-preview__content">
+          {pastes.length === 0 && !isLoading ? (
+            <div className="feed-preview__empty">{t("feedPreview.noPastes")}</div>
+          ) : isLoading ? (
+            <div className="feed-preview__loading">{t("feedPreview.loading")}</div>
+          ) : (
+            pastes.map((paste) => {
+              return (
+                <a
+                  href={`/${paste.id}`}
+                  className="feed-preview__paste-link"
+                  key={paste.id}
+                >
+                  <div className="feed-preview__paste">
+                    <h2>{paste.title || t("feedPreview.noTitle")}</h2>
+                    <span className="feed-preview__paste-author">
+                      {t("feedPreview.author")}: {paste.user.username}
+                    </span>
+                    <span className="feed-preview__paste-date">{formatTimeAgo(paste.createdAt, t)}</span>
+                  </div>
+                </a>
+              );
+            })
+          )}
+        </div>
+      </Card>
     </div>
   );
 }

@@ -9,217 +9,49 @@
   height: 60px;
   box-sizing: border-box;
   width: 100vw;
-  margin-bottom: 24px;
   padding: 16px 32px;
   background: #f7f8fa;
   z-index: 1000;
 }
 
-.header__left,
-.header__right {
+.header-start {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
 }
 
-.header__title {
-  font-size: 22px;
+.header-brand {
+  text-decoration: none;
+  color: var(--primary-color);
   font-weight: 700;
-  color: #4a90e2;
-  letter-spacing: 1px;
-  text-decoration: none;
-  cursor: pointer;
+  font-size: 20px;
 }
 
-.header__button {
+.header-end {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 8px 18px;
-  background: #4a90e2;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
 }
 
-.header__button:hover {
-  background: #357abd;
-  color: #fff;
-  text-decoration: none;
-}
-
-.header__button--outline {
-  margin-right: 12px;
-  background: #fff;
-  border: 1px solid #4a90e2;
-  color: #4a90e2;
-}
-
-.header__button--outline:hover {
-  background: #eaf4fd;
-  color: #357abd;
-  border-color: #357abd;
-}
-
-.header__button--outline-logout {
-  margin-left: 12px;
-  background: #fff;
-  border: 1px solid red;
-  color: red;
-}
-
-.header__button--outline-logout:hover {
-  background: #ffeaea;
-  color: #b71c1c;
-  border-color: #b71c1c;
-}
-
-.header__new-paste {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 18px;
-  padding: 8px 16px;
-  background: #27ae60;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.header__new-paste:hover {
-  background: #219150;
-  color: #fff;
-}
-
-.header__new-paste-text {
-  display: inline;
-}
-
-.header__feed {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  margin-left: 18px;
-  padding: 8px 16px;
-  background: #f39c12;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.header__feed:hover {
-  background: #d68910;
-  color: #fff;
-}
-
-.header__feed-text {
-  display: inline;
-}
-
-.header__lang-switch {
+.header-lang {
   display: flex;
   align-items: center;
-  margin-right: 16px;
-  gap: 2px;
 }
 
-.header__lang-btn {
-  background: #fff;
-  border: 1px solid #4a90e2;
-  color: #4a90e2;
-  padding: 4px 10px;
-  border-radius: 3px;
-  font-size: 14px;
+.header-lang-dropdown {
+  min-width: 80px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border 0.15s;
 }
 
-.header__lang-btn--active,
-.header__lang-btn:hover {
-  background: #4a90e2;
-  color: #fff;
-  border-color: #357abd;
-}
-
-@media (max-width: 1100px) {
-  .header__feed {
-    display: inline-flex;
-  }
-}
-
-@media (max-width: 900px) {
-  .header {
-    padding: 10px 8px;
-    margin-bottom: 12px;
+@media (max-width: 550px) {
+  .header .p-button .p-button-label,
+  .header .language-option,
+  .header .language-value {
+    display: none;
   }
 
-  .header__left,
-  .header__right {
-    gap: 10px;
-  }
-
-  .header__title {
-    padding: 0 2px;
-  }
-
-  .header__button,
-  .header__button--outline,
-  .header__button--outline-logout {
-    aspect-ratio: 1;
-    font-size: 14px;
-    padding: 7px 10px;
-    margin: 0 2px;
-  }
-
-  .header__new-paste {
-    padding: 7px 7px;
-    font-size: 18px;
-    margin-left: 8px;
-    min-width: 36px;
-    min-height: 36px;
-    justify-content: center;
-  }
-
-  .header__new-paste-text {
-    display: none !important;
-  }
-
-  .header__feed {
-    padding: 7px 7px;
-    font-size: 18px;
-    margin-left: 8px;
-    min-width: 36px;
-    min-height: 36px;
-    justify-content: center;
-  }
-
-  .header__feed-text {
-    display: none !important;
-  }
-
-  .header__lang-switch {
-    margin-right: 2px;
-  }
-
-  .header__lang-btn {
-    font-size: 12px;
-    padding: 3px 6px;
+  .header .p-button .p-button-icon-left,
+  .header .p-dropdown .mr-2 {
+    margin-right: auto !important;
   }
 }

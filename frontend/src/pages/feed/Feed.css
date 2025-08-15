@@ -10,15 +10,8 @@
 .feed-paste-view__wrapper {
   gap: 24px;
   width: 100%;
-  max-width: 90%;
-  margin: 0 auto;
-  margin-top: 90px;
-}
-
-@media (max-width: 900px) {
-  .feed-paste-view__wrapper {
-    margin-top: 70px;
-  }
+  max-width: 960px;
+  margin-top: 20px;
 }
 
 .feed-paste-view__wrapper--center {
@@ -32,8 +25,20 @@
 .feed__section-label {
   font-size: 18px;
   font-weight: 600;
-  color: #4a90e2;
-  margin-bottom: 18px;
+  color: var(--primary-color);
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+.feed-card {
+  width: 100%;
+  padding: 16px;
+  box-shadow: none;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .feed-card {
+    padding: 12px;
+  }
 }

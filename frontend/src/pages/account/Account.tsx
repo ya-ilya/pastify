@@ -1,5 +1,6 @@
 import "./Account.css";
 
+import { Card } from "primereact/card";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,10 +12,12 @@ export function Account() {
   const { t } = useTranslation();
 
   const [pastes, setPastes] = useState<api.Paste[]>([]);
+  const [user, setUser] = useState<api.User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setPastes([]);
+    setUser(null);
 
     if (!meController) {
       return;
@@ -22,14 +25,15 @@ export function Account() {
 
     setIsLoading(true);
 
-    meController!
-      .getPastes()
-      .then((data) => {
-        setPastes(data);
+    Promise.all([meController.getPastes(), meController.getUser()])
+      .then(([pastesData, userData]) => {
+        setPastes(pastesData);
+        setUser(userData);
       })
       .catch((error) => {
-        console.error("Failed to fetch paste:", error);
+        console.error("Failed to fetch account data:", error);
         setPastes([]);
+        setUser(null);
       })
       .finally(() => {
         setIsLoading(false);
@@ -42,17 +46,33 @@ export function Account() {
       {!isLoading ? (
         pastes.length === 0 ? (
           <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
-            <div className="paste-view paste-view--loading">{t("account.noPastes")}</div>
+            <Card className="account-card">
+              <div className="paste--loading">{t("account.noPastes")}</div>
+            </Card>
           </div>
         ) : (
           <div className="account-paste-view__wrapper">
-            <div className="account__section-label">{t("account.sectionLabel")}</div>
-            <PasteTable pastes={pastes} />
+            <Card className="account-card">
+              <div className="account__section-header">
+                <div className="account__section-label">{t("account.sectionLabel")}</div>
+                {user ? (
+                  <div className="account-user-info">
+                    <span className="account-user-name">{user.username}</span>
+                    <span className="account-user-registered">
+                      {t("account.registeredAt")}: {new Date(user.registeredOn).toLocaleDateString()}
+                    </span>
+                  </div>
+                ) : null}
+              </div>
+              <PasteTable pastes={pastes} />
+            </Card>
           </div>
         )
       ) : (
         <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
-          <div className="paste-view paste-view--loading">{t("account.loading")}</div>
+          <Card className="account-card">
+            <div className="paste--loading">{t("account.loading")}</div>
+          </Card>
         </div>
       )}
       <FeedPreview />

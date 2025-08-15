@@ -1,5 +1,9 @@
 import "./SignUp.css";
 
+import { Button } from "primereact/button";
+import { Card } from "primereact/card";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -62,53 +66,89 @@ export function SignUp() {
     <>
       <Header />
       <div className="signup-page">
-        <h2 className="signup-title">{t("signup.title")}</h2>
-        <form
-          className="signup-form"
-          onSubmit={handleSubmit}
-        >
-          <input
-            type="text"
-            placeholder={t("signup.username")}
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            autoFocus
-            required
-            className="signup-input"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="signup-input"
-          />
-          <input
-            type="password"
-            placeholder={t("signup.password")}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="signup-input"
-          />
-          <input
-            type="password"
-            placeholder={t("signup.confirmPassword")}
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            required
-            className="signup-input"
-          />
-          {error && <div className="signup-error">{error}</div>}
-          <button
-            type="submit"
-            disabled={loading}
-            className="signup-submit"
+        <Card className="signup-card">
+          <h2 className="signup-title">{t("signup.title")}</h2>
+          <form
+            className="p-fluid signup-form"
+            onSubmit={handleSubmit}
           >
-            {loading ? t("signup.loading") : t("signup.signup")}
-          </button>
-        </form>
+            <div className="p-field">
+              <label
+                htmlFor="username"
+                className="sr-only"
+              >
+                {t("signup.username")}
+              </label>
+              <InputText
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder={t("signup.username")}
+                autoFocus
+              />
+            </div>
+
+            <div className="p-field">
+              <label
+                htmlFor="email"
+                className="sr-only"
+              >
+                Email
+              </label>
+              <InputText
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+            </div>
+
+            <div className="p-field">
+              <label
+                htmlFor="password"
+                className="sr-only"
+              >
+                {t("signup.password")}
+              </label>
+              <Password
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={t("signup.password")}
+                toggleMask
+                feedback={false}
+              />
+            </div>
+
+            <div className="p-field">
+              <label
+                htmlFor="confirm"
+                className="sr-only"
+              >
+                {t("signup.confirmPassword")}
+              </label>
+              <Password
+                id="confirm"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                placeholder={t("signup.confirmPassword")}
+                toggleMask
+                feedback={false}
+              />
+            </div>
+
+            {error && <div className="signup-error">{error}</div>}
+
+            <div className="p-d-flex p-jc-between p-ai-center signup-actions">
+              <Button
+                label={loading ? t("signup.loading") : t("signup.signup")}
+                icon="pi pi-user-plus"
+                type="submit"
+                loading={loading}
+              />
+            </div>
+          </form>
+        </Card>
       </div>
     </>
   );

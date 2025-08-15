@@ -1,6 +1,6 @@
-import LanguageDetector from "i18next-browser-languagedetector";
 import axios from "axios";
 import i18n from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 export const axiosClient = axios.create({
@@ -34,6 +34,7 @@ i18n
           "pasteForm.create": "Create",
           "pasteForm.needLogin": "To create a new paste, please sign in",
           "account.sectionLabel": "Account",
+          "account.registeredAt": "Registered on",
           "account.noPastes": "You haven't created any pastes yet",
           "account.loading": "Loading...",
           "feed.sectionLabel": "Feed",
@@ -76,6 +77,7 @@ i18n
           "pasteView.public": "Public",
           "pasteView.created": "Created",
           "pasteView.expires": "Expires",
+          "pasteView.expiresNever": "Never",
           "pasteTable.title": "Title",
           "pasteTable.createdAt": "Created at",
           "pasteTable.syntax": "Syntax",
@@ -121,6 +123,7 @@ i18n
           "pasteForm.create": "Создать",
           "pasteForm.needLogin": "Чтобы создать новую пасту, войдите в аккаунт",
           "account.sectionLabel": "Аккаунт",
+          "account.registeredAt": "Дата регистрации",
           "account.noPastes": "Вы еще не создавали паст",
           "account.loading": "Загрузка...",
           "feed.sectionLabel": "Лента",
@@ -163,6 +166,7 @@ i18n
           "pasteView.public": "Публичная",
           "pasteView.created": "Создана",
           "pasteView.expires": "Истекает",
+          "pasteView.expiresNever": "Никогда",
           "pasteTable.title": "Название",
           "pasteTable.createdAt": "Дата создания",
           "pasteTable.syntax": "Синтаксис",

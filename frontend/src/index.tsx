@@ -1,5 +1,10 @@
 import "./index.css";
+import "primeflex/primeflex.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.css";
+import "primeicons/primeicons.css";
 
+import { PrimeReactProvider } from "primereact/api";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
@@ -76,9 +81,11 @@ function AuthenticationRoute() {
   }, [session, setSession]);
 
   return (
-    <AuthenticationContext.Provider value={[session, setSession]}>
-      <Outlet />
-    </AuthenticationContext.Provider>
+    <PrimeReactProvider>
+      <AuthenticationContext.Provider value={[session, setSession]}>
+        <Outlet />
+      </AuthenticationContext.Provider>
+    </PrimeReactProvider>
   );
 }
 

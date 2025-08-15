@@ -115,3 +115,13 @@
   margin-top: 2px;
   margin-left: 2px;
 }
+
+.feed-preview-card {
+  background: transparent;
+  box-shadow: none;
+}
+
+.feed-preview-card .p-card-content,
+.feed-preview-card .p-card-body {
+  padding: 0 !important;
+}

@@ -9,6 +9,11 @@
   margin-bottom: 24px;
 }
 
+.paste-table-card {
+  background: transparent;
+  box-shadow: none;
+}
+
 .paste-table__table th,
 .paste-table__table td {
   padding: 10px 8px;
@@ -36,7 +41,7 @@
 }
 
 .paste-table__link:hover {
-  color: #4a90e2;
+  color: var(--primary-color);
   text-decoration: underline;
 }
 
