@@ -63,93 +63,94 @@ export function SignUp() {
   };
 
   return (
-    <>
+    <div className="signup">
       <Header />
-      <div className="signup-page">
-        <Card className="signup-card">
-          <h2 className="signup-title">{t("signup.title")}</h2>
-          <form
-            className="p-fluid signup-form"
-            onSubmit={handleSubmit}
-          >
-            <div className="p-field">
-              <label
-                htmlFor="username"
-                className="sr-only"
-              >
-                {t("signup.username")}
-              </label>
-              <InputText
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder={t("signup.username")}
-                autoFocus
-              />
-            </div>
+      <Card className="signup-card">
+        <h2 className="signup-title">{t("signup.title")}</h2>
+        <form
+          className="p-fluid signup-form"
+          onSubmit={handleSubmit}
+        >
+          <div className="p-field">
+            <label
+              htmlFor="username"
+              className="sr-only"
+            >
+              {t("signup.username")}
+            </label>
+            <InputText
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder={t("signup.username")}
+              autoFocus
+            />
+          </div>
 
-            <div className="p-field">
-              <label
-                htmlFor="email"
-                className="sr-only"
-              >
-                Email
-              </label>
-              <InputText
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-              />
-            </div>
+          <div className="p-field">
+            <label
+              htmlFor="email"
+              className="sr-only"
+            >
+              Email
+            </label>
+            <InputText
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+          </div>
 
-            <div className="p-field">
-              <label
-                htmlFor="password"
-                className="sr-only"
-              >
-                {t("signup.password")}
-              </label>
-              <Password
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={t("signup.password")}
-                toggleMask
-                feedback={false}
-              />
-            </div>
+          <div className="p-field">
+            <label
+              htmlFor="password"
+              className="sr-only"
+            >
+              {t("signup.password")}
+            </label>
+            <Password
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder={t("signup.password")}
+              promptLabel={t("signup.passwordPrompt")}
+              weakLabel={t("signup.weakPassword")}
+              mediumLabel={t("signup.mediumPassword")}
+              strongLabel={t("signup.strongPassword")}
+              toggleMask
+            />
+          </div>
 
-            <div className="p-field">
-              <label
-                htmlFor="confirm"
-                className="sr-only"
-              >
-                {t("signup.confirmPassword")}
-              </label>
-              <Password
-                id="confirm"
-                value={confirm}
-                onChange={(e) => setConfirm(e.target.value)}
-                placeholder={t("signup.confirmPassword")}
-                toggleMask
-                feedback={false}
-              />
-            </div>
+          <div className="p-field">
+            <label
+              htmlFor="confirm"
+              className="sr-only"
+            >
+              {t("signup.confirmPassword")}
+            </label>
+            <Password
+              id="confirm"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              placeholder={t("signup.confirmPassword")}
+              toggleMask
+              feedback={false}
+            />
+          </div>
 
-            {error && <div className="signup-error">{error}</div>}
+          {error && <div className="signup-error">{error}</div>}
 
-            <div className="p-d-flex p-jc-between p-ai-center signup-actions">
-              <Button
-                label={loading ? t("signup.loading") : t("signup.signup")}
-                icon="pi pi-user-plus"
-                type="submit"
-                loading={loading}
-              />
-            </div>
-          </form>
-        </Card>
-      </div>
-    </>
+          <div className="p-d-flex p-jc-between p-ai-center signup-actions">
+            <Button
+              label={loading ? t("signup.loading") : t("signup.signup")}
+              icon="pi pi-user-plus"
+              type="submit"
+              loading={loading}
+            />
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 }

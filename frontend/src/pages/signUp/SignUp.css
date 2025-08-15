@@ -1,12 +1,20 @@
-.signup-page {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 0 16px;
+.signup {
+  display: flex;
+  width: 100%;
+  background-color: #f0f2f5;
+  position: relative;
+  box-sizing: border-box;
+  padding: 16px;
+  justify-content: center;
 }
 
 .signup-card {
-  padding: 24px;
   border-radius: 8px;
+  margin-top: 60px;
+}
+
+.signup-card .p-card-content {
+  padding: 0 !important;
 }
 
 .signup-title {
