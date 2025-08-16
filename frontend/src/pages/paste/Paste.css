@@ -12,7 +12,7 @@
   padding: 0 !important;
 }
 
-.paste-paste-view__wrapper {
+.paste-card__wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -112,7 +112,7 @@
 }
 
 @media (max-width: 850px) {
-  .paste-paste-view__wrapper {
+  .paste-card__wrapper {
     max-width: calc(100% - 32px);
     padding: 0 16px;
   }

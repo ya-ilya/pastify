@@ -76,7 +76,7 @@ export function Paste() {
     <div className="paste">
       <Header />
       {!isLoading && paste ? (
-        <div className="paste-paste-view__wrapper">
+        <div className="paste-card__wrapper">
           <Card className="paste-card">
             <div className="paste-actions">
               <Button
@@ -143,13 +143,13 @@ export function Paste() {
           </Card>
         </div>
       ) : isLoading ? (
-        <div className="paste-paste-view__wrapper">
+        <div className="paste-card__wrapper">
           <Card className="paste-card">
             <div className="paste--loading">{t("paste.loading")}</div>
           </Card>
         </div>
       ) : (
-        <div className="paste-paste-view__wrapper">
+        <div className="paste-card__wrapper">
           <Card className="paste-card">
             <div className="paste--error">{t("paste.notFound")}</div>
           </Card>

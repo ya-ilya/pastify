@@ -40,7 +40,7 @@ services:
       context: .
       dockerfile: frontend.dockerfile
     ports:
-      - "8080:8080"
+      - "80:80"
     networks:
       - net
     depends_on:

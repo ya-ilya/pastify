@@ -7,14 +7,14 @@
   background-color: #f0f2f5;
 }
 
-.feed-paste-view__wrapper {
+.feed-card__wrapper {
   gap: 24px;
   width: 100%;
   max-width: 960px;
   margin-top: 20px;
 }
 
-.feed-paste-view__wrapper--center {
+.feed-card__wrapper--center {
   display: flex;
   justify-content: center;
   align-items: center;

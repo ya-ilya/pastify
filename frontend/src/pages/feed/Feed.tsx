@@ -53,19 +53,19 @@ export function Feed() {
     <div className="feed">
       <Header />
       {pastes.length === 0 && !isLoading ? (
-        <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
+        <div className="feed-card__wrapper feed-card__wrapper--center">
           <Card className="feed-card">
             <div className="paste--loading">{t("feed.noPastes")}</div>
           </Card>
         </div>
       ) : isLoading && pastes.length === 0 ? (
-        <div className="feed-paste-view__wrapper feed-paste-view__wrapper--center">
+        <div className="feed-card__wrapper feed-card__wrapper--center">
           <Card className="feed-card">
             <div className="paste--loading">{t("feed.loading")}</div>
           </Card>
         </div>
       ) : (
-        <div className="feed-paste-view__wrapper">
+        <div className="feed-card__wrapper">
           <Card className="feed-card">
             <div className="feed__section-label">{t("feed.sectionLabel")}</div>
             <PasteTable pastes={pastes} />

@@ -28,7 +28,7 @@ COPY --from=build /frontend/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /frontend/dist /usr/share/nginx/html
 
 # Expose the application port
-EXPOSE 8080
+EXPOSE 80
 
 # Set the entrypoint
 CMD ["nginx", "-g", "daemon off;"]

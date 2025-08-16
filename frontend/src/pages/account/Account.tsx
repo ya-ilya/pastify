@@ -45,13 +45,13 @@ export function Account() {
       <Header />
       {!isLoading ? (
         pastes.length === 0 ? (
-          <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
+          <div className="account-card__wrapper account-card__wrapper--center">
             <Card className="account-card">
               <div className="paste--loading">{t("account.noPastes")}</div>
             </Card>
           </div>
         ) : (
-          <div className="account-paste-view__wrapper">
+          <div className="account-card__wrapper">
             <Card className="account-card">
               <div className="account__section-header">
                 <div className="account__section-label">{t("account.sectionLabel")}</div>
@@ -69,7 +69,7 @@ export function Account() {
           </div>
         )
       ) : (
-        <div className="account-paste-view__wrapper account-paste-view__wrapper--center">
+        <div className="account-card__wrapper account-card__wrapper--center">
           <Card className="account-card">
             <div className="paste--loading">{t("account.loading")}</div>
           </Card>
