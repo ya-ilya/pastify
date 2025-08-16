@@ -6,7 +6,8 @@ import { Checkbox } from "primereact/checkbox";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
-import { useContext, useState } from "react";
+import { Toast } from "primereact/toast";
+import { useContext, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -37,6 +38,12 @@ export function App() {
 
   const syntaxOptions = Object.values(api.PasteSyntax).map((v) => ({ label: v, value: v }));
 
+  const toast = useRef<Toast>(null);
+
+  const showToast = (severity: "success" | "error", summary: string, detail: string) => {
+    toast.current?.show({ severity, summary, detail });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -47,7 +54,6 @@ export function App() {
         expiration: expiration,
         isPrivate: isPrivate,
       });
-      alert(t("paste.created"));
       setTitle("");
       setContent("");
       setSyntax(api.PasteSyntax.plaintext);
@@ -56,7 +62,7 @@ export function App() {
       navigate(`/${paste.id}`);
     } catch (err) {
       console.error("Failed to create paste:", err);
-      alert(t("paste.createError"));
+      showToast("error", t("paste.createError"), "");
     }
   };
 
@@ -64,6 +70,7 @@ export function App() {
 
   return (
     <div className="app">
+      <Toast ref={toast} />
       <Header />
       <div className="paste-form__wrapper">
         <Card className={`paste-form${!session ? " paste-form--blurred" : ""}`}>

@@ -46,7 +46,6 @@ export function SignIn() {
         password: password.trim(),
       });
       setSession(response);
-      alert(t("signin.success"));
       navigate("/");
     } catch (error: any) {
       setError(error?.response?.data?.message || t("signin.error"));

@@ -53,7 +53,6 @@ export function SignUp() {
         password: password.trim(),
       });
       setSession(response);
-      alert(t("signup.success"));
       navigate("/");
     } catch (error: any) {
       setError(error?.response?.data?.message || t("signup.error"));

@@ -2,7 +2,8 @@ import "./Paste.css";
 
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
-import { useContext, useEffect, useState } from "react";
+import { Toast } from "primereact/toast";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -22,6 +23,12 @@ export function Paste() {
   const params = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const toast = useRef<Toast>(null);
+
+  const showToast = (severity: "success" | "error", summary: string, detail: string) => {
+    toast.current?.show({ severity, summary, detail });
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,16 +71,16 @@ export function Paste() {
     if (!window.confirm(t("pasteView.confirmDelete"))) return;
     try {
       await pasteControllerAuth.deletePaste(paste.id);
-      alert(t("pasteView.deleted"));
       navigate("/");
     } catch (err) {
       console.error(t("pasteView.deleteErrorLog"), err);
-      alert(t("pasteView.deleteError"));
+      showToast("error", t("pasteView.deleteError"), "");
     }
   };
 
   return (
     <div className="paste">
+      <Toast ref={toast} />
       <Header />
       {!isLoading && paste ? (
         <div className="paste-card__wrapper">
@@ -109,23 +116,44 @@ export function Paste() {
                 <h2 className="paste-title">{paste.title ?? t("pasteView.noTitle")}</h2>
                 <div className="paste-submeta">
                   <div className="meta-item">
-                    <i className="pi pi-user" aria-hidden />
-                    <span>{t("pasteView.author")}: {paste.user?.username ?? "-"}</span>
+                    <i
+                      className="pi pi-user"
+                      aria-hidden
+                    />
+                    <span>
+                      {t("pasteView.author")}: {paste.user?.username ?? "-"}
+                    </span>
                   </div>
 
                   <div className="meta-item">
-                    <i className={paste.isPrivate ? "pi pi-lock" : "pi pi-globe"} aria-hidden />
-                    <span>{t("pasteView.privacy")}: {paste.isPrivate ? t("pasteView.private") : t("pasteView.public")}</span>
+                    <i
+                      className={paste.isPrivate ? "pi pi-lock" : "pi pi-globe"}
+                      aria-hidden
+                    />
+                    <span>
+                      {t("pasteView.privacy")}: {paste.isPrivate ? t("pasteView.private") : t("pasteView.public")}
+                    </span>
                   </div>
 
                   <div className="meta-item">
-                    <i className="pi pi-calendar" aria-hidden />
-                    <span>{t("pasteView.created")}: {new Date(paste.createdAt).toLocaleString()}</span>
+                    <i
+                      className="pi pi-calendar"
+                      aria-hidden
+                    />
+                    <span>
+                      {t("pasteView.created")}: {new Date(paste.createdAt).toLocaleString()}
+                    </span>
                   </div>
 
                   <div className="meta-item">
-                    <i className="pi pi-hourglass" aria-hidden />
-                    <span>{t("pasteView.expires")}: {paste.expiresOn ? new Date(paste.expiresOn).toLocaleString() : t("pasteView.expiresNever")}</span>
+                    <i
+                      className="pi pi-hourglass"
+                      aria-hidden
+                    />
+                    <span>
+                      {t("pasteView.expires")}:{" "}
+                      {paste.expiresOn ? new Date(paste.expiresOn).toLocaleString() : t("pasteView.expiresNever")}
+                    </span>
                   </div>
                 </div>
               </div>
